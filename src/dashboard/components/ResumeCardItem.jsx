@@ -36,7 +36,7 @@ function ResumeCardItem({resume,refreshData}) {
   const onDelete=()=>{
     setLoading(true);
     GlobalApi.DeleteResumeById(resume.documentId).then(resp=>{
-      console.log(resp);
+      // console.log(resp);
       toast('Resume Deleted!');
       refreshData()
       setLoading(false);
@@ -45,6 +45,7 @@ function ResumeCardItem({resume,refreshData}) {
       setLoading(false);
     })
   }
+  // console.log(resume)
   return (
     
        <div className=''>
@@ -65,11 +66,10 @@ function ResumeCardItem({resume,refreshData}) {
               </div>
         </div>
         </Link>
-        <div className='border p-3 flex justify-between  text-white rounded-b-lg shadow-lg'
-         style={{
-          background:resume?.themeColor
+        <div className='border p-3 flex justify-between  text-white rounded-b-lg shadow-lg 'style={{
+          backgroundColor:resume?.themeColor
         }}>
-          <h2 className='text-sm'>{resume.title}</h2>
+          <h2 className='text-sm '>{resume.title}</h2>
          
           <DropdownMenu>
           <DropdownMenuTrigger>

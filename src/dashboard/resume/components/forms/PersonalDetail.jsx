@@ -10,12 +10,13 @@ import { toast } from 'sonner';
 function PersonalDetail({enabledNext}) {
 
     const params=useParams();
+  
     const {resumeInfo,setResumeInfo}=useContext(ResumeInfoContext)
 
     const [formData,setFormData]=useState();
     const [loading,setLoading]=useState(false);
     useEffect(()=>{
-        console.log("---",resumeInfo)
+        // console.log("---",resumeInfo)
     },[])
 
     const handleInputChange=(e)=>{
@@ -39,7 +40,6 @@ function PersonalDetail({enabledNext}) {
             data:formData
         }
         GlobalApi.UpdateResumeDetail(params?.resumeId,data).then(resp=>{
-            console.log(resp);
             enabledNext(true);
             setLoading(false);
             toast("Details updated")

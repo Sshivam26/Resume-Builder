@@ -17,7 +17,6 @@ function ViewResume() {
     },[])
     const GetResumeInfo=()=>{
         GlobalApi.GetResumeById(resumeId).then(resp=>{
-            console.log(resp.data.data);
             setResumeInfo(resp.data.data);
         })
     }

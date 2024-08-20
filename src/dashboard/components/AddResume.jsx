@@ -27,23 +27,25 @@ function AddResume() {
     const onCreate=async()=>{
         setLoading(true)
         const uuid=uuidv4();
+
         const data={
             data:{
                 title:resumeTitle,
-                resumeId:uuid,
-                userEmail:user?.primaryEmailAddress?.emailAddress,
-                userName:user?.fullName
+                resumeid:uuid,
+                userName:user?.fullName,
+                userEmail:user?.primaryEmailAddress?.emailAddress
             }
         }
 
+
         GlobalApi.CreateNewResume(data).then(resp=>{
-            console.log(resp.data.data.documentId);
             if(resp)
             {
                 setLoading(false);
                 navigation('/dashboard/resume/'+resp.data.data.documentId+"/edit");
             }
         },(error)=>{
+            console.log('Galat hai')
             setLoading(false);
         })
 
@@ -66,14 +68,14 @@ function AddResume() {
         <DialogContent>
             <DialogHeader>
             <DialogTitle>Create New Resume</DialogTitle>
-            <DialogDescription>
-                <p>Add a title for your new resume</p>
+            
+                <p className='text-gray-500 pb-2'>Add a title for your new resume</p>
                 <Input className="my-2" 
                 placeholder="Ex.Full Stack resume"
                 onChange={(e)=>setResumeTitle(e.target.value)}
                 />
-            </DialogDescription>
-            <div className='flex justify-end gap-5'>
+            
+            <div className='flex justify-end gap-5 pt-4'>
                 <Button onClick={()=>setOpenDialog(false)} variant="ghost">Cancel</Button>
                 <Button 
                     disabled={!resumeTitle||loading}

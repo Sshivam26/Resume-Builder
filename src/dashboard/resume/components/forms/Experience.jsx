@@ -24,16 +24,22 @@ function Experience() {
     const params=useParams();
     const [loading,setLoading]=useState(false);
 
-    useEffect(()=>{
-        resumeInfo?.Experience.length>0&&setExperinceList(resumeInfo?.Experience)
+    // useEffect(()=>{
+    //     resumeInfo?.Experience.length>0&&setExperinceList(resumeInfo?.Experience)
         
-    },[])
+    // },[])
+    useEffect(()=>{
+        if (resumeInfo?.experience?.length > 0) {
+            setExperinceList(resumeInfo.experience);
+        }
+    }, [resumeInfo]);
+    
 
     const handleChange=(index,event)=>{
         const newEntries=experinceList.slice();
         const {name,value}=event.target;
         newEntries[index][name]=value;
-        console.log(newEntries)
+        // console.log(newEntries)
         setExperinceList(newEntries);
     }
 
@@ -64,7 +70,7 @@ function Experience() {
     useEffect(()=>{
         setResumeInfo({
             ...resumeInfo,
-            Experience:experinceList
+            experience:experinceList
         });
      
     },[experinceList]);
@@ -74,14 +80,13 @@ function Experience() {
         setLoading(true)
         const data={
             data:{
-                Experience:experinceList.map(({ id, ...rest }) => rest)
+                experience:experinceList.map(({ id, ...rest }) => rest)
             }
         }
 
-         console.log(experinceList)
 
         GlobalApi.UpdateResumeDetail(params?.resumeId,data).then(res=>{
-            console.log(res);
+            // console.log(res);
             setLoading(false);
             toast('Details updated !')
         },(error)=>{
@@ -89,6 +94,7 @@ function Experience() {
         })
 
     }
+    
   return (
     <div>
         <div className='p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10'>

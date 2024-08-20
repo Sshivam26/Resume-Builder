@@ -7,6 +7,7 @@ import ResumeCardItem from './components/ResumeCardItem';
 function Dashboard() {
 
   const {user}=useUser();
+
   const [resumeList,setResumeList]=useState([]);
   useEffect(()=>{
     user&&GetResumesList()
@@ -18,10 +19,11 @@ function Dashboard() {
   const GetResumesList=()=>{
     GlobalApi.GetUserResumes(user?.primaryEmailAddress?.emailAddress)
     .then(resp=>{
-      console.log(resp.data.data)
+      // console.log(resp.data.data)
       setResumeList(resp.data.data);
     })
   }
+  // console.log(resumeList)
   return (
     <div className='p-10 md:px-20 lg:px-32'>
       <h2 className='font-bold text-3xl'>My Resume</h2>
@@ -31,7 +33,7 @@ function Dashboard() {
       mt-10
       '>
         <AddResume/>
-        {resumeList.length>0?resumeList.map((resume,index)=>(
+        {resumeList ? resumeList.map((resume,index)=>(
           <ResumeCardItem resume={resume} key={index} refreshData={GetResumesList} />
         )):
         [1,2,3,4].map((item,index)=>(
